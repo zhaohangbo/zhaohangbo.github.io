@@ -1,0 +1,218 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <meta name="author" content=""> <meta name="keywords" content="FluentD, Netflow"> <title>Collect Netflow Data via FluentD</title> <meta name="description" content="Install td-agent (Fluentd)"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="shortcut icon" href="/assets/img/profile/curry-shoot-1.jpg" /> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://zhaohangbo.me//2016/03/04/collect-netflow-via-fluentd.html"> <link rel="alternate" type="application/rss+xml" title="赵杭波的个人博客" href="http://zhaohangbo.me//pages/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/profile/curry-shoot-1.jpg"/> </a> <div id="sidebar-social"> <a href="/pages/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:zhaohangbo1991@gmail.com" class="sidebar-social-icon email"></a> <a href="https://twitter.com/zhaohangbo" class="sidebar-social-icon twitter" target="_blank"></a> <a href="https://github.com/zhaohangbo" class="sidebar-social-icon github" target="_blank"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="工具">工具</li> <li class="sidebar-tag" data-filter="读书">读书</li> <li class="sidebar-tag" data-filter="技术">技术</li> <li class="sidebar-tag" data-filter="生活">生活</li> <li class="sidebar-tag" data-filter="追求">追求</li> <li class="sidebar-tag" data-filter="算法">算法</li> <li class="sidebar-tag" data-filter="创业">创业</li> <li class="sidebar-tag" data-filter="产品">产品</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="算法" href="/2016/03/10/Leetcode-255.html"> Leetcod 255 </a> <a class="toc-link" data-tags="产品" href="/2016/03/09/Axure.html"> 产品设计 </a> <a class="toc-link" data-tags="算法" href="/2016/03/09/Leetcode-144-94-235-156.html"> Leetcode 144, 94, 235, 156 </a> <a class="toc-link" data-tags="生活" href="/2016/03/08/health-is-most-important.html"> 健康 </a> <a class="toc-link" data-tags="技术" href="/2016/03/07/contribute-to-openstack.html"> How to Contribute to Openstack </a> <a class="toc-link" data-tags="算法" href="/2016/03/07/Leetcode-100-and-226.html"> Leetcode 100 & 226 </a> <a class="toc-link" data-tags="技术" href="/2016/03/05/snmp.html"> snmp </a> <a class="toc-link" data-tags="技术" href="/2016/03/04/collect-netflow-via-fluentd.html"> Collect Netflow Data via FluentD </a> <a class="toc-link" data-tags="追求" href="/2016/03/04/list-of-specific-goals-in-the-rest-time-of-cisco-internship.html"> 清单--2016年3月4月5月6月 </a> <a class="toc-link" data-tags="工具" href="/2016/03/03/vim-power.html"> Vim </a> <a class="toc-link" data-tags="技术" href="/2016/03/03/fluentd.html"> FluentD 学习使用开发 </a> <a class="toc-link" data-tags="生活" href="/2016/03/03/humor.html"> 幽默 </a> <a class="toc-link" data-tags="创业" href="/2016/03/02/find-expert.html"> 小团队找大专家 </a> <a class="toc-link" data-tags="算法" href="/2016/03/01/Leetcode-315.html"> Leetcode 315 </a> <a class="toc-link" data-tags="生活" href="/2016/02/28/dead-poets-society.html"> Dead Poets Society </a> <a class="toc-link" data-tags="工具" href="/2016/02/27/markdown.html"> Markdown </a> <a class="toc-link" data-tags="技术" href="/2016/02/27/how-to-build-blog.html"> 如何搭建博客 </a> <a class="toc-link" data-tags="创业" href="/2016/02/27/logs-metrics-visualization-in-real-time.html"> Logs and Metrics Visualization Platform </a> <a class="toc-link" data-tags="生活" href="/2016/02/27/about-us-visa.html"> 美国签证(H1B,L1,J1,10-year) </a> <a class="toc-link" data-tags="追求" href="/2016/02/27/rule-of-life.html"> Rule of Life </a> <a class="toc-link" data-tags="追求" href="/2016/02/27/list-of-life.html"> List of Life </a> <a class="toc-link" data-tags="生活" href="/2015/12/11/the-importentance-of-writing.html"> 持续写作的重要性 </a> <a class="toc-link" data-tags="算法" href="/2015/09/07/sort-algorithms.html"> 七种常见经典排序算法总结（C++实现） </a> <a class="toc-link" data-tags="追求" href="/2015/04/13/rent-car-by-zipcar.html"> 使用 Zipcar 在加州租车 </a> <a class="toc-link" data-tags="生活" href="/2014/12/12/travel-of-california.html"> 美西加州三日游 </a> <a class="toc-link" data-tags="工具" href="/2014/08/03/general-mac-resources.html"> Mac 常用资源 </a> <a class="toc-link" data-tags="技术" href="/2014/04/19/design-patterns-of-java.html"> 设计模式详解及Java实现 </a> <a class="toc-link" data-tags="工具" href="/2014/04/10/vagrant.html"> Vagrant </a> <a class="toc-link" data-tags="工具" href="/2014/04/10/docker.html"> Docker </a> <a class="toc-link" data-tags="读书" href="/2014/03/14/book-list-of-2014.html"> 待读书单 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-shell-resources.html"> Shell 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-python-resources.html"> Python 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-javascript-resources.html"> JavaScript 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-git-resources.html"> Git 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2013/12/08/linux.html"> Linux </a> <a class="toc-link" data-tags="工具" href="/2013/08/06/how-to-learn.html"> How to Learn </a> <a class="toc-link" data-tags="工具" href="/2013/04/23/blog.html"> Blog </a> <a class="toc-link" data-tags="工具" href="/2013/03/25/sever-deployment.html"> Sever Deployment </a> <a class="toc-link" data-tags="工具" href="/2013/01/16/git.html"> Git </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2016 March 04</span> <span class="post-meta-span tag">FluentD, Netflow</span> </div> <h1 class="post-title">Collect Netflow Data via FluentD</h1> <h3 id="install-td-agent-fluentd">Install td-agent (Fluentd)</h3> <div class="highlighter-rouge"><pre class="highlight"><code>For Trusty,
+curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent2.sh | sh
+</code></pre></div> <p><a href="http://docs.fluentd.org/v0.12/categories/installation">[Installation Instruction Here]</a></p> <h3 id="before-install-plugins">Before Install Plugins</h3> <div class="highlighter-rouge"><pre class="highlight"><code>Before install geoip plugin, you need to do 2 things :
+
+1. GeoIP Legacy City Database Installation :
+   [Instruction]( https://dev.maxmind.com/geoip/legacy/install/city/)
+      $ gunzip GeoLiteCity.dat.gz
+      $ mv GeoLiteCity.dat /Your/Path/To/GeoIP/, usually /usr/share/GeoIP
+2. Install dependent c library as below :
+   For RHEL/CentOS
+      $ sudo yum group install "Development Tools"
+      $ sudo yum install geoip-devel --enablerepo=epel
+   For Ubuntu/Debian
+      $ sudo apt-get install build-essential
+      $ sudo apt-get install libgeoip-dev
+   For OS X
+      $ brew install geoip
+</code></pre></div> <h3 id="plugin">Plugin</h3> <div class="highlighter-rouge"><pre class="highlight"><code>1. fluent-plugin-record-reformer
+  $ sudo td-agent-gem install fluent-plugin-record-reformer
+2. fluent-plugin-secure-forward
+  $ sudo td-agent-gem install fluent-plugin-secure-forward -v 0.2.6
+3. fluent-plugin-netflow
+  $ sudo td-agent-gem install fluent-plugin-netflow
+4. fluent-plugin-geoip
+  $ sudo td-agent-gem install fluent-plugin-geoip
+</code></pre></div> <h3 id="config-file">Config File</h3> <p><strong>Path:/etc/td-agent/td-agent.config</strong></p> <div class="highlighter-rouge"><pre class="highlight"><code>## match tag=debug.** and dump to console
+&lt;match debug.**&gt;
+  type stdout
+&lt;/match&gt;
+
+####
+## Source descriptions:
+##
+
+## built-in TCP input
+## @see http://docs.fluentd.org/articles/in_forward
+&lt;source&gt;
+  type forward
+&lt;/source&gt;
+
+## built-in UNIX socket input
+#&lt;source&gt;
+#  type unix
+#&lt;/source&gt;
+
+# HTTP input
+# POST http://localhost:8888/&lt;tag&gt;?json=&lt;json&gt;
+# POST http://localhost:8888/td.myapp.login?json={"user"%3A"me"}
+# @see http://docs.fluentd.org/articles/in_http
+&lt;source&gt;
+  type http
+  port 8888
+&lt;/source&gt;
+
+## live debugging agent
+&lt;source&gt;
+  type debug_agent
+  bind 127.0.0.1
+  port 24230
+&lt;/source&gt;
+
+&lt;source&gt;
+  type syslog
+  port 42185
+  tag  syslog
+&lt;/source&gt;
+
+&lt;match syslog.**&gt;
+  type record_reformer
+  tag logs.${tag}.username-token
+  &lt;record&gt;
+    timestamp ${time}
+  &lt;/record&gt;
+&lt;/match&gt;
+
+&lt;source&gt;
+  type netflow
+  tag netflow.event
+  # optional parameters
+  #bind 192.133.156.7
+  bind 0.0.0.0
+  port 5140
+  # optional parser parameters
+  cache_ttl 6000
+  versions [5, 9]
+&lt;/source&gt;
+
+#&lt;match togeoip.netflows&gt;
+&lt;match netflow.event.**&gt;
+  type                   geoip
+  geoip_lookup_key       ipv4_src_addr
+  geoip_database         /usr/share/GeoIP/GeoLiteCity.dat
+  &lt;record&gt;
+    geoip.location      ${latitude["ipv4_src_addr"]},${longitude["ipv4_src_addr"]}
+  &lt;/record&gt;
+  tag                    netflows.geoip.attached
+  skip_adding_null_record  true
+&lt;/match&gt;
+
+&lt;match netflows.geoip.attached.** &gt;
+  type record_reformer
+  #tag logs.${tag}.&lt;YOUR USERNAME HERE&gt;-&lt;YOUR TOKEN HERE&gt;
+   tag logs.${tag}.username-token
+  &lt;record&gt;
+    @timestamp ${time}
+  &lt;/record&gt;
+&lt;/match&gt;
+
+&lt;match logs.**&gt;
+#  type copy
+#  &lt;store&gt;
+#        type file
+#        path /var/log/td-agent/netflow-data/netflow.data
+#  &lt;/store&gt;
+#  &lt;store&gt;
+  	type secure_forward
+  	shared_key cisco_zeus_log_metric_pipline
+  	self_hostname fluentd-client1.ciscozeus.io
+  	secure false
+  	keepalive 10
+  	&lt;server&gt;
+	     	host data01.ciscozeus.io
+  	&lt;/server&gt;
+#  &lt;/store&gt;
+#  &lt;store&gt;
+#        type stdout
+#  &lt;/store&gt;
+&lt;/match&gt;
+
+####
+## Examples:
+##
+
+## File input
+## read apache logs continuously and tags td.apache.access
+#&lt;source&gt;
+#  type tail
+#  format apache
+#  path /var/log/httpd-access.log
+#  tag td.apache.access
+#&lt;/source&gt;
+
+## File output
+## match tag=local.** and write to file
+#&lt;match local.**&gt;
+#  type file
+#  path /var/log/td-agent/access
+#&lt;/match&gt;
+
+## Forwarding
+## match tag=system.** and forward to another td-agent server
+#&lt;match system.**&gt;
+#  type forward
+#  host 192.168.0.11
+#  # secondary host is optional
+#  &lt;secondary&gt;
+#    host 192.168.0.12
+#  &lt;/secondary&gt;
+#&lt;/match&gt;
+
+## Multiple output
+## match tag=td.*.* and output to Treasure Data AND file
+#&lt;match td.*.*&gt;
+#  type copy
+#  &lt;store&gt;
+#    type tdlog
+#    apikey API_KEY
+#    auto_create_table
+#    buffer_type file
+#    buffer_path /var/log/td-agent/buffer/td
+#  &lt;/store&gt;
+#  &lt;store&gt;
+#    type file
+#    path /var/log/td-agent/td-%Y-%m-%d/%H.log
+#  &lt;/store&gt;
+#&lt;/match&gt;
+</code></pre></div> <h3 id="start-td-agent">Start Td-agent</h3> <div class="highlighter-rouge"><pre class="highlight"><code>  $ sudo /etc/init.d/td-agent start
+</code></pre></div> <h3 id="start-send-your-netflow-data">Start Send Your NetFlow Data</h3> <div class="highlighter-rouge"><pre class="highlight"><code>Tail your td-agent log:
+  $ sudo tail -f /var/log/td-agent/td-agent.log
+
+You will see the following info:
+
+[info]: listening fluent socket on 0.0.0.0:24224
+[info]: listening dRuby uri="druby://127.0.0.1:24230" object="Engine"
+[info]: listening syslog socket on 0.0.0.0:42185 with udp
+[info]: listening netflow socket on 0.0.0.0:5140 with udp
+[info]: connection established to data.awesome.io.
+
+So the agent listening fluent socket on 0.0.0.0:24224.
+Now you can configure your network devices and send the data.
+</code></pre></div> <h3 id="netflow-json-data-sample">Netflow Json Data Sample</h3> <div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"version"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="w">
+</span><span class="nt">"flow_seq_num"</span><span class="p">:</span><span class="mi">65469633</span><span class="p">,</span><span class="w">
+</span><span class="nt">"engine_type"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+</span><span class="nt">"engine_id"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+</span><span class="nt">"sampling_algorithm"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+</span><span class="nt">"sampling_interval"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
+</span><span class="nt">"flow_records"</span><span class="p">:</span><span class="mi">30</span><span class="p">,</span><span class="w">
+</span><span class="nt">"ipv4_src_addr"</span><span class="p">:</span><span class="s2">"192.133.151.21”,
+"</span><span class="err">ipv</span><span class="mi">4</span><span class="err">_dst_addr</span><span class="s2">":"</span><span class="mf">172.22</span><span class="err">.</span><span class="mf">250.141</span><span class="err">”</span><span class="p">,</span><span class="w">
+</span><span class="nt">"ipv4_next_hop"</span><span class="p">:</span><span class="s2">"64.71.176.49”,
+"</span><span class="err">input_snmp</span><span class="s2">":5,
+"</span><span class="err">output_snmp</span><span class="s2">":8,
+"</span><span class="err">in_pkts</span><span class="s2">":1,
+"</span><span class="err">in_bytes</span><span class="s2">":60,
+"</span><span class="err">first_switched</span><span class="s2">":"</span><span class="mi">2016-03-02</span><span class="err">T</span><span class="mi">15</span><span class="err">:</span><span class="mi">15</span><span class="err">:</span><span class="mf">36.999</span><span class="err">Z”</span><span class="p">,</span><span class="w">
+</span><span class="nt">"last_switched"</span><span class="p">:</span><span class="s2">"2016-03-02T15:15:36.999Z”,
+"</span><span class="err">l</span><span class="mi">4</span><span class="err">_src_port</span><span class="s2">":63682,
+"</span><span class="err">l</span><span class="mi">4</span><span class="err">_dst_port</span><span class="s2">":6001,
+"</span><span class="err">tcp_flags</span><span class="s2">":2,"</span><span class="err">protocol</span><span class="s2">":6,
+"</span><span class="err">src_tos</span><span class="s2">":0,"</span><span class="err">src_as</span><span class="s2">":0,"</span><span class="err">dst_as</span><span class="s2">":0,
+"</span><span class="err">src_mask</span><span class="s2">":0,
+"</span><span class="err">dst_mask</span><span class="s2">":0,
+"</span><span class="err">host</span><span class="s2">":"</span><span class="mf">192.133</span><span class="err">.</span><span class="mf">159.1</span><span class="err">”</span><span class="p">,</span><span class="w">
+</span><span class="nt">"geoip.location"</span><span class="p">:</span><span class="s2">"33.918800354003906,-84.06780242919922”,
+"</span><span class="err">timestamp</span><span class="s2">":"</span><span class="mi">2016-03-02</span><span class="w"> </span><span class="mi">07</span><span class="err">:</span><span class="mi">15</span><span class="err">:</span><span class="mi">51</span><span class="w"> </span><span class="mi">-0800</span><span class="err">"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div> <h3 id="dashboard-demo">Dashboard Demo</h3> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://zhaohangbo.me//2016/03/04/collect-netflow-via-fluentd.html&text=Collect Netflow Data via FluentD" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://zhaohangbo.me//2016/03/04/collect-netflow-via-fluentd.html&title=Collect Netflow Data via FluentD" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://zhaohangbo.me//2016/03/04/collect-netflow-via-fluentd.html&title=Collect Netflow Data via FluentD" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="comment container"> <div id="disqus_thread"> <a href=""></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-54767140-1', 'zhaohangbo.me'); ga('send', 'pageview'); </script> </body> </html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <meta name="author" content=""> <meta name="keywords" content="算法,排序,Sort,Algorithm"> <title>七种常见经典排序算法总结（C++实现）</title> <meta name="description" content="排序算法是非常常见也非常基础的算法，以至于大部分情况下它们都被集成到了语言的辅助库中。排序算法虽然已经可以很方便的使用，但是理解排序算法可以帮助我们找到解题的方向。"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="shortcut icon" href="/assets/img/profile/curry-shoot-1.jpg" /> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://zhaohangbo.me//2015/09/07/sort-algorithms.html"> <link rel="alternate" type="application/rss+xml" title="赵杭波的个人博客" href="http://zhaohangbo.me//pages/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/profile/curry-shoot-1.jpg"/> </a> <div id="sidebar-social"> <a href="/pages/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:zhaohangbo1991@gmail.com" class="sidebar-social-icon email"></a> <a href="https://twitter.com/zhaohangbo" class="sidebar-social-icon twitter" target="_blank"></a> <a href="https://github.com/zhaohangbo" class="sidebar-social-icon github" target="_blank"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="工具">工具</li> <li class="sidebar-tag" data-filter="读书">读书</li> <li class="sidebar-tag" data-filter="技术">技术</li> <li class="sidebar-tag" data-filter="生活">生活</li> <li class="sidebar-tag" data-filter="追求">追求</li> <li class="sidebar-tag" data-filter="算法">算法</li> <li class="sidebar-tag" data-filter="创业">创业</li> <li class="sidebar-tag" data-filter="产品">产品</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="算法" href="/2016/03/10/Leetcode-255.html"> Leetcod 255 </a> <a class="toc-link" data-tags="产品" href="/2016/03/09/Axure.html"> 产品设计 </a> <a class="toc-link" data-tags="算法" href="/2016/03/09/Leetcode-144-94-235-156.html"> Leetcode 144, 94, 235, 156 </a> <a class="toc-link" data-tags="生活" href="/2016/03/08/health-is-most-important.html"> 健康 </a> <a class="toc-link" data-tags="技术" href="/2016/03/07/contribute-to-openstack.html"> How to Contribute to Openstack </a> <a class="toc-link" data-tags="算法" href="/2016/03/07/Leetcode-100-and-226.html"> Leetcode 100 & 226 </a> <a class="toc-link" data-tags="技术" href="/2016/03/05/snmp.html"> snmp </a> <a class="toc-link" data-tags="技术" href="/2016/03/04/collect-netflow-via-fluentd.html"> Collect Netflow Data via FluentD </a> <a class="toc-link" data-tags="追求" href="/2016/03/04/list-of-specific-goals-in-the-rest-time-of-cisco-internship.html"> 清单--2016年3月4月5月6月 </a> <a class="toc-link" data-tags="工具" href="/2016/03/03/vim-power.html"> Vim </a> <a class="toc-link" data-tags="技术" href="/2016/03/03/fluentd.html"> FluentD 学习使用开发 </a> <a class="toc-link" data-tags="生活" href="/2016/03/03/humor.html"> 幽默 </a> <a class="toc-link" data-tags="创业" href="/2016/03/02/find-expert.html"> 小团队找大专家 </a> <a class="toc-link" data-tags="算法" href="/2016/03/01/Leetcode-315.html"> Leetcode 315 </a> <a class="toc-link" data-tags="生活" href="/2016/02/28/dead-poets-society.html"> Dead Poets Society </a> <a class="toc-link" data-tags="工具" href="/2016/02/27/markdown.html"> Markdown </a> <a class="toc-link" data-tags="技术" href="/2016/02/27/how-to-build-blog.html"> 如何搭建博客 </a> <a class="toc-link" data-tags="创业" href="/2016/02/27/logs-metrics-visualization-in-real-time.html"> Logs and Metrics Visualization Platform </a> <a class="toc-link" data-tags="生活" href="/2016/02/27/about-us-visa.html"> 美国签证(H1B,L1,J1,10-year) </a> <a class="toc-link" data-tags="追求" href="/2016/02/27/rule-of-life.html"> Rule of Life </a> <a class="toc-link" data-tags="追求" href="/2016/02/27/list-of-life.html"> List of Life </a> <a class="toc-link" data-tags="生活" href="/2015/12/11/the-importentance-of-writing.html"> 持续写作的重要性 </a> <a class="toc-link" data-tags="算法" href="/2015/09/07/sort-algorithms.html"> 七种常见经典排序算法总结（C++实现） </a> <a class="toc-link" data-tags="追求" href="/2015/04/13/rent-car-by-zipcar.html"> 使用 Zipcar 在加州租车 </a> <a class="toc-link" data-tags="生活" href="/2014/12/12/travel-of-california.html"> 美西加州三日游 </a> <a class="toc-link" data-tags="工具" href="/2014/08/03/general-mac-resources.html"> Mac 常用资源 </a> <a class="toc-link" data-tags="技术" href="/2014/04/19/design-patterns-of-java.html"> 设计模式详解及Java实现 </a> <a class="toc-link" data-tags="工具" href="/2014/04/10/vagrant.html"> Vagrant </a> <a class="toc-link" data-tags="工具" href="/2014/04/10/docker.html"> Docker </a> <a class="toc-link" data-tags="读书" href="/2014/03/14/book-list-of-2014.html"> 待读书单 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-shell-resources.html"> Shell 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-python-resources.html"> Python 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-javascript-resources.html"> JavaScript 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2014/01/15/general-git-resources.html"> Git 常用资源 </a> <a class="toc-link" data-tags="工具" href="/2013/12/08/linux.html"> Linux </a> <a class="toc-link" data-tags="工具" href="/2013/08/06/how-to-learn.html"> How to Learn </a> <a class="toc-link" data-tags="工具" href="/2013/04/23/blog.html"> Blog </a> <a class="toc-link" data-tags="工具" href="/2013/03/25/sever-deployment.html"> Sever Deployment </a> <a class="toc-link" data-tags="工具" href="/2013/01/16/git.html"> Git </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2015 September 07</span> <span class="post-meta-span tag">算法</span> </div> <h1 class="post-title">七种常见经典排序算法总结（C++实现）</h1> <p>排序算法是非常常见也非常基础的算法，以至于大部分情况下它们都被集成到了语言的辅助库中。排序算法虽然已经可以很方便的使用，但是理解排序算法可以帮助我们找到解题的方向。</p> <h2 id="bubble-sort">1. 冒泡排序 (Bubble Sort)</h2> <p>冒泡排序是最简单粗暴的排序方法之一。它的原理很简单，每次从左到右两两比较，把大的交换到后面，每次可以确保将前M个元素的最大值移动到最右边。</p> <p><strong>步骤</strong></p> <ol> <li>从左开始比较相邻的两个元素x和y，如果 x &gt; y 就交换两者</li> <li>执行比较和交换，直到到达数组的最后一个元素</li> <li>重复执行1和2，直到执行n次，也就是n个最大元素都排到了最后</li> </ol><pre><code class="language-CPP">void bubble_sort(vector&lt;int&gt; &amp;nums)
+{
+    for (int i = 0; i &lt; nums.size() - 1; i++) { // times
+        for (int j = 0; j &lt; nums.size() - i - 1; j++) { // position
+            if (nums[j] &gt; nums[j + 1]) {
+                int temp = nums[j];
+                nums[j] = nums[j + 1];
+                nums[j + 1] = temp;
+            }
+        }
+    }
+}
+</code></pre><p>交换的那一步可以不借助temp，方法是</p><pre><code class="language-CPP">nums[j] += nums[j + 1];
+nums[j + 1] = num[j] - nums[j + 1];
+nums[j] -= num[j + 1];
+</code></pre><p><strong>复杂度分析</strong></p> <p>由于我们要重复执行n次冒泡，每次冒泡要执行n次比较（实际是1到n的等差数列，也就是<code class="highlighter-rouge">(a1 + an) * n / 2</code>），也就是 <code class="highlighter-rouge">O(n^2)</code>。 空间复杂度是<code class="highlighter-rouge">O(n)</code>。</p> <h2 id="insertion-sort">2. 插入排序（Insertion Sort）</h2> <p>插入排序的原理是从左到右，把选出的一个数和前面的数进行比较，找到最适合它的位置放入，使前面部分有序。</p> <p><strong>步骤</strong></p> <ol> <li>从左开始，选出当前位置的数x，和它之前的数y比较，如果x &lt; y则交换两者</li> <li>对x之前的数都执行1步骤，直到前面的数字都有序</li> <li>选择有序部分后一个数字，插入到前面有序部分，直到没有数字可选择</li> </ol><pre><code class="language-CPP">void insert_sort(vector&lt;int&gt; &amp;nums)
+{
+    for (int i = 1; i &lt; nums.size(); i++) { // position
+        for (int j = i; j &gt; 0; j--) {
+            if (nums[j] &lt; nums[j - 1]) {
+                int temp = nums[j];
+                nums[j] = nums[j - 1];
+                nums[j - 1] = temp;
+            }
+        }
+    }
+}
+</code></pre><p><strong>复杂度分析</strong></p> <p>因为要选择n次，而且插入时最坏要比较n次，所以时间复杂度同样是<code class="highlighter-rouge">O(n^2)</code>。空间复杂度是<code class="highlighter-rouge">O(n)</code>。</p> <h2 id="selection-sort">3. 选择排序（Selection Sort）</h2> <p>选择排序的原理是，每次都从乱序数组中找到最大（最小）值，放到当前乱序数组头部，最终使数组有序。</p> <p><strong>步骤</strong></p> <ol> <li>从左开始，选择后面元素中最小值，和最左元素交换</li> <li>从当前已交换位置往后执行，直到最后一个元素</li> </ol><pre><code class="language-CPP">void selection_sort(vector&lt;int&gt; &amp;nums)
+{
+    for (int i = 0; i &lt; nums.size(); i++) { // position
+        int min = i;
+        for (int j = i + 1; j &lt; nums.size(); j++) {
+            if (nums[j] &lt; nums[min]) {
+                min = j;
+            }
+        }
+
+        int temp = nums[i];
+        nums[i] = nums[min];
+        nums[min] = temp;
+    }
+}
+</code></pre><p><strong>复杂度分析</strong></p> <p>每次要找一遍最小值，最坏情况下找n次，这样的过程要执行n次，所以时间复杂度还是<code class="highlighter-rouge">O(n^2)</code>。空间复杂度是<code class="highlighter-rouge">O(n)</code>。</p> <h2 id="shell-sort">4. 希尔排序（Shell Sort）</h2> <p>希尔排序从名字上看不出来特点，因为它是以发明者命名的。它的另一个名字是“递减增量排序算法“。这个算法可以看作是插入排序的优化版，因为插入排序需要一位一位比较，然后放置到正确位置。为了提升比较的跨度，希尔排序将数组按照一定步长分成几个子数组进行排序，通过逐渐减短步长来完成最终排序。</p> <p><strong>例子</strong></p> <p>例如 <code class="highlighter-rouge">[10, 80, 70, 100, 90, 30, 20]</code> 如果我们按照一次减一半的步长来算， 这个数组第一次排序时以3为步长，子数组是：</p> <p><code class="highlighter-rouge">10 80 70</code> <code class="highlighter-rouge">90 30 20</code> <code class="highlighter-rouge">100</code></p> <p>这里其实按照列划分的4个子数组，排序后结果为</p> <p><code class="highlighter-rouge">10 30 20</code> <code class="highlighter-rouge">90 80 70</code> <code class="highlighter-rouge">100</code></p> <p>也就是 <code class="highlighter-rouge">[10, 30 20 90 80 70 100]</code></p> <p>然后再以1为步长生成子数组</p> <p><code class="highlighter-rouge">10</code> <code class="highlighter-rouge">30</code> <code class="highlighter-rouge">20</code> <code class="highlighter-rouge">..</code></p> <p>这个时候就是一纵列了，也就是说最后一定是以一个数组来排序的。</p> <p><strong>步骤</strong></p> <ol> <li>计算当前步长，按步长划分子数组</li> <li>子数组内插入排序</li> <li>步长除以2后继续12两步，直到步长最后变成1</li> </ol><pre><code class="language-CPP">void shell_sort(vector&lt;int&gt; &amp;nums)
+{
+    for (int gap = nums.size() &gt;&gt; 1; gap &gt; 0; gap &gt;&gt;= 1) { // times
+        for (int i = gap; i &lt; nums.size(); i++) { // position
+            int temp = nums[i];
+
+            int j = i - gap;
+            for (; j &gt;= 0 &amp;&amp; nums[j] &gt; temp; j -= gap) {
+                nums[j + gap] = nums[j];
+            }
+
+            nums[j + gap] = temp;
+        }
+    }
+}
+</code></pre><p><strong>复杂度分析</strong></p> <p>希尔排序的时间复杂度受步长的影响，具体分析在<a href="https://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F#.E6.AD.A5.E9.95.BF.E5.BA.8F.E5.88.97">维基百科</a>。</p> <h2 id="merge-sort">5. 归并排序（Merge Sort）</h2> <p>归并排序是采用分治法（Divide and Conquer）的一个典型例子。这个排序的特点是把一个数组打散成小数组，然后再把小数组拼凑再排序，直到最终数组有序。</p> <p><strong>步骤</strong></p> <ol> <li>把当前数组分化成n个单位为1的子数组，然后两两比较合并成单位为2的n/2个子数组</li> <li>继续进行这个过程，按照2的倍数进行子数组的比较合并，直到最终数组有序</li> </ol><pre><code class="language-CPP">void merge_array(vector&lt;int&gt; &amp;nums, int b, int m, int e, vector&lt;int&gt; &amp;temp)
+{
+    int lb = b, rb = m, tb = b;
+    while (lb != m &amp;&amp; rb != e)
+        if (nums[lb] &lt; nums[rb])
+            temp[tb++] = nums[lb++];
+        else
+            temp[tb++] = nums[rb++];
+
+    while (lb &lt; m)
+        temp[tb++] = nums[lb++];
+    
+    while (rb &lt; e)
+        temp[tb++] = nums[rb++];
+
+    for (int i = b;i &lt; e; i++)
+        nums[i] = temp[i];
+}
+
+void merge_sort(vector&lt;int&gt; &amp;nums, int b, int e, vector&lt;int&gt; &amp;temp)
+{
+    int m = (b + e) / 2;
+    if (m != b) {
+        merge_sort(nums, b, m, temp);
+        merge_sort(nums, m, e, temp);
+        merge_array(nums, b, m, e, temp);
+    }
+}
+</code></pre><p>这个实现中加了一个temp，是和原数组一样大的一个空间，用来临时存放排序后的子数组的。</p> <p><strong>复杂度分析</strong></p> <p>在<code class="highlighter-rouge">merge_array</code>过程中，实际的操作是当前两个子数组的长度，即2m。又因为打散数组是二分的，最终循环执行数是<code class="highlighter-rouge">logn</code>。所以这个算法最终时间复杂度是<code class="highlighter-rouge">O(nlogn)</code>，空间复杂度是<code class="highlighter-rouge">O(n)</code>。</p> <h2 id="quick-sort">6. 快速排序（Quick Sort）</h2> <p>快速排序也是利用分治法实现的一个排序算法。快速排序和归并排序不同，它不是一半一半的分子数组，而是选择一个基准数，把比这个数小的挪到左边，把比这个数大的移到右边。然后不断对左右两部分也执行相同步骤，直到整个数组有序。</p> <p><strong>步骤</strong></p> <ol> <li>用一个基准数将数组分成两个子数组</li> <li>将大于基准数的移到右边，小于的移到左边</li> <li>递归的对子数组重复执行1，2，直到整个数组有序</li> </ol><pre><code class="language-CPP">void quick_sort(vector&lt;int&gt; &amp;nums, int b, int e, vector&lt;int&gt; &amp;temp)
+{
+    int m = (b + e) / 2;
+    if (m != b) {
+        int lb = b, rb = e - 1;
+
+        for (int i = b; i &lt; e; i++) {
+            if (i == m)
+                continue;
+            if (nums[i] &lt; nums[m])
+                temp[lb++] = nums[i];
+            else
+                temp[rb--] = nums[i];
+        }
+        temp[lb] = nums[m];
+        
+        for (int i = b; i &lt; e; i++)
+            nums[i] = temp[i];
+        
+        quick_sort(nums, b, lb, temp);
+        quick_sort(nums, lb + 1, e, temp);
+    }
+}
+</code></pre><p>解法2: 不需要辅助空间</p><pre><code class="language-CPP">void quick_sort(vector&lt;int&gt; &amp;nums, int b, int e)
+{
+    if (b &lt; e - 1) {
+        int lb = b, rb = e - 1;
+        while (lb &lt; rb) {
+            while (nums[rb] &gt;= nums[b] &amp;&amp; lb &lt; rb)
+                rb--;
+            while (nums[lb] &lt;= nums[b] &amp;&amp; lb &lt; rb)
+                lb++;
+            swap(nums[lb], nums[rb]);
+        }
+        swap(nums[b], nums[lb]);
+        quick_sort(nums, b, lb);
+        quick_sort(nums, lb + 1, e);
+    }
+}
+</code></pre><p><strong>复杂度分析</strong></p> <p>快速排序也是一个不稳定排序，时间复杂度看<a href="https://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F#.E5.B9.B3.E5.9D.87.E8.A4.87.E9.9B.9C.E5.BA.A6">维基百科</a>。空间复杂度是<code class="highlighter-rouge">O(n)</code>。</p> <h2 id="heap-sort">7. 堆排序（Heap Sort）</h2> <p>堆排序经常用于求一个数组中最大k个元素时。因为堆实际上是一个完全二叉树，所以用它可以用一维数组来表示。因为最大堆的第一位总为当前堆中最大值，所以每次将最大值移除后，调整堆即可获得下一个最大值，通过一遍一遍执行这个过程就可以得到前k大元素，或者使堆有序。</p> <p>在了解算法之前，首先了解在一维数组中节点的下标：</p> <ul> <li>i节点的父节点 parent(i) = floor((i-1)/2)</li> <li>i节点的左子节点 left(i) = 2i + 1</li> <li>i节点的右子节点 right(i) = 2i + 2</li> </ul> <p><strong>步骤</strong></p> <ol> <li>构造最大堆（Build Max Heap）：首先将当前元素放入最大堆下一个位置，然后将此元素依次和它的父节点比较，如果大于父节点就和父节点交换，直到比较到根节点。重复执行到最后一个元素。</li> <li>最大堆调整（Max Heapify）：调整最大堆即将根节点移除后重新整理堆。整理方法为将根节点和最后一个节点交换，然后把堆看做n-1长度，将当前根节点逐步移动到其应该在的位置。</li> <li>堆排序（HeapSort）：重复执行2，直到所有根节点都已移除。</li> </ol><pre><code class="language-CPP">void heap_sort(vector&lt;int&gt; &amp;nums)
+{
+    int n = nums.size();
+    for (int i = n / 2 - 1; i &gt;= 0; i--) { // build max heap
+        max_heapify(nums, i, nums.size() - 1);
+    }
+    
+    for (int i = n - 1; i &gt; 0; i--) { // heap sort
+        int temp = nums[i];
+        num[i] = nums[0];
+        num[0] = temp;
+        max_heapify(nums, 0, i);
+    }
+}
+
+void max_heapify(vector&lt;int&gt; &amp;nums, int beg, int end)
+{
+    int curr = beg;
+    int child = curr * 2 + 1;
+    while (child &lt; end) {
+        if (child + 1 &lt; end &amp;&amp; nums[child] &lt; nums[child + 1]) {
+            child++;
+        }
+        if (nums[curr] &lt; nums[child]) {
+            int temp = nums[curr];
+            nums[curr] = nums[child];
+            num[child] = temp;
+            curr = child;
+            child = 2 * curr + 1;
+        } else {
+            break;
+        }
+    }
+}
+</code></pre><p><strong>复杂度分析</strong></p> <p>堆执行一次调整需要<code class="highlighter-rouge">O(logn)</code>的时间，在排序过程中需要遍历所有元素执行堆调整，所以最终时间复杂度是<code class="highlighter-rouge">O(nlogn)</code>。空间复杂度是<code class="highlighter-rouge">O(n)</code>。</p> <h2 id="section">0. 参考</h2> <ul> <li>维基百科</li> <li><a href="http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/">经典排序算法总结与实现</a></li> <li><a href="http://segmentfault.com/a/1190000002466215">堆排序C++实现</a></li> <li><a href="http://bubkoo.com/2014/01/14/sort-algorithm/heap-sort/">常见排序算法 - 堆排序 (Heap Sort)</a></li> </ul> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://zhaohangbo.me//2015/09/07/sort-algorithms.html&text=七种常见经典排序算法总结（C++实现）" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://zhaohangbo.me//2015/09/07/sort-algorithms.html&title=七种常见经典排序算法总结（C++实现）" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://zhaohangbo.me//2015/09/07/sort-algorithms.html&title=七种常见经典排序算法总结（C++实现）" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="comment container"> <div id="disqus_thread"> <a href=""></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> <script> (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-54767140-1', 'zhaohangbo.me'); ga('send', 'pageview'); </script> </body> </html>
