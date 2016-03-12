@@ -6,12 +6,253 @@
 </description>
     <link>http://zhaohangbo.me//</link>
     <atom:link href="http://zhaohangbo.me//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 11 Mar 2016 10:12:17 -0800</pubDate>
-    <lastBuildDate>Fri, 11 Mar 2016 10:12:17 -0800</lastBuildDate>
+    <pubDate>Fri, 11 Mar 2016 23:09:57 -0800</pubDate>
+    <lastBuildDate>Fri, 11 Mar 2016 23:09:57 -0800</lastBuildDate>
     <generator>Jekyll v3.1.2</generator>
     
       <item>
-        <title>Leetcod 255</title>
+        <title>Leetcode 230</title>
+        <description>&lt;h3 id=&quot;leetcode-230-kth-smallest-element-in-a-bst&quot;&gt;Leetcode 230. Kth Smallest Element in a BST&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Question:
+    &lt;ul&gt;
+      &lt;li&gt;Given a binary search tree, write a function kthSmallest to find the kth smallest element in it.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Note:
+    &lt;ul&gt;
+      &lt;li&gt;You may assume k is always valid, 1 ≤ k ≤ BST’s total elements.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Follow up:
+    &lt;ul&gt;
+      &lt;li&gt;What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently?&lt;/li&gt;
+      &lt;li&gt;How would you optimize the kthSmallest routine?&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;method-1-binary-search-dfs-most-preferable&quot;&gt;Method 1: Binary Search (dfs): most preferable&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;kthSmallest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//Be aware that root is (count+1)-th node&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kthSmallest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kthSmallest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// k&amp;gt;count &amp;amp;&amp;amp; k&amp;lt;=count+1  ---&amp;gt; k == count+1&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+	&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;//root!=null&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;method-2-dfs-in-order-recursive&quot;&gt;Method 2: DFS in-order recursive:&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;kthSmallest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;method-3-dfs-in-order-iterative&quot;&gt;Method 3: DFS in-order iterative:&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;kthSmallest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10086&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 11 Mar 2016 00:00:00 -0800</pubDate>
+        <link>http://zhaohangbo.me//2016/03/11/Leetcode-230.html</link>
+        <guid isPermaLink="true">http://zhaohangbo.me//2016/03/11/Leetcode-230.html</guid>
+        
+        <category>算法</category>
+        
+        <category>Leetcode</category>
+        
+        <category>Tree，Google</category>
+        
+        
+        <category>算法</category>
+        
+      </item>
+    
+      <item>
+        <title>Leetcode 116</title>
+        <description>&lt;h3 id=&quot;populating-next-right-pointers-in-each-node&quot;&gt;116. Populating Next Right Pointers in Each Node&lt;/h3&gt;
+
+&lt;p&gt;敲代码前，想清楚。思路对了，代码就很容易写。&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;题目&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;For example,
+Given the following perfect binary tree,
+         1
+       /  \
+      2    3
+     / \  / \
+    4  5  6  7
+After calling your function, the tree should look like:
+         1 -&amp;gt; NULL
+       /  \
+      2 -&amp;gt; 3 -&amp;gt; NULL
+     / \  / \
+    4-&amp;gt;5-&amp;gt;6-&amp;gt;7 -&amp;gt; NULL
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;解题思路&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- 运用Queue，层遍历。
+- 思考有没有其他方法？如递归。
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;代码&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeLinkNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;Queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeLinkNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinkedList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TreeLinkNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;();&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()){&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;TreeLinkNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;poll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;queue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 11 Mar 2016 00:00:00 -0800</pubDate>
+        <link>http://zhaohangbo.me//2016/03/11/Leetcode-116.html</link>
+        <guid isPermaLink="true">http://zhaohangbo.me//2016/03/11/Leetcode-116.html</guid>
+        
+        <category>算法</category>
+        
+        <category>Leetcode</category>
+        
+        <category>Tree</category>
+        
+        <category>Algorithm</category>
+        
+        
+        <category>算法</category>
+        
+      </item>
+    
+      <item>
+        <title>Leetcode 108</title>
+        <description>&lt;h3 id=&quot;leetcode-108-convert-sorted-array-to-binary-search-tree&quot;&gt;Leetcode 108. Convert Sorted Array to Binary Search Tree&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Question
+    &lt;ul&gt;
+      &lt;li&gt;Given an array where elements are sorted in “ascending” order, convert it to a height balanced BST.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Idea to Solve The Problem
+    &lt;ul&gt;
+      &lt;li&gt;To ensure it’s height balanced BST&lt;/li&gt;
+      &lt;li&gt;We can choose the mid as root every time,&lt;/li&gt;
+      &lt;li&gt;0~mid as left subtree and mid~length as right subtree&lt;/li&gt;
+      &lt;li&gt;Obviously the length of left subtree and right subtree are equal&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sortedArrayToBST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getTree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getTree&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;low&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;high&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;high&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;high&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TreeNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getTree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;low&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getTree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;high&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Fri, 11 Mar 2016 00:00:00 -0800</pubDate>
+        <link>http://zhaohangbo.me//2016/03/11/Leetcode-108.html</link>
+        <guid isPermaLink="true">http://zhaohangbo.me//2016/03/11/Leetcode-108.html</guid>
+        
+        <category>算法</category>
+        
+        <category>Leetcode</category>
+        
+        <category>Tree</category>
+        
+        <category>Algorithm</category>
+        
+        
+        <category>算法</category>
+        
+      </item>
+    
+      <item>
+        <title>Leetcode 255</title>
         <description>&lt;h3 id=&quot;leetcode-255-verify-preorder-sequence-in-binary-search-tree&quot;&gt;Leetcode 255. Verify Preorder Sequence in Binary Search Tree&lt;/h3&gt;
 
 &lt;ul&gt;
@@ -421,399 +662,6 @@ deb http://fr.archive.ubuntu.com/ubuntu precise main multiverse
         
         
         <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>Collect Netflow Data via FluentD</title>
-        <description>&lt;h3 id=&quot;install-td-agent-fluentd&quot;&gt;Install td-agent (Fluentd)&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;For Trusty,
-curl -L https://toolbelt.treasuredata.com/sh/install-ubuntu-trusty-td-agent2.sh | sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;a href=&quot;http://docs.fluentd.org/v0.12/categories/installation&quot;&gt;[Installation Instruction Here]&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;before-install-plugins&quot;&gt;Before Install Plugins&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Before install geoip plugin, you need to do 2 things :
-
-1. GeoIP Legacy City Database Installation :
-   [Instruction]( https://dev.maxmind.com/geoip/legacy/install/city/)
-      $ gunzip GeoLiteCity.dat.gz
-      $ mv GeoLiteCity.dat /Your/Path/To/GeoIP/, usually /usr/share/GeoIP
-2. Install dependent c library as below :
-   For RHEL/CentOS
-      $ sudo yum group install &quot;Development Tools&quot;
-      $ sudo yum install geoip-devel --enablerepo=epel
-   For Ubuntu/Debian
-      $ sudo apt-get install build-essential
-      $ sudo apt-get install libgeoip-dev
-   For OS X
-      $ brew install geoip
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;plugin&quot;&gt;Plugin&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1. fluent-plugin-record-reformer
-  $ sudo td-agent-gem install fluent-plugin-record-reformer
-2. fluent-plugin-secure-forward
-  $ sudo td-agent-gem install fluent-plugin-secure-forward -v 0.2.6
-3. fluent-plugin-netflow
-  $ sudo td-agent-gem install fluent-plugin-netflow
-4. fluent-plugin-geoip
-  $ sudo td-agent-gem install fluent-plugin-geoip
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;config-file&quot;&gt;Config File&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Path:/etc/td-agent/td-agent.config&lt;/strong&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;## match tag=debug.** and dump to console
-&amp;lt;match debug.**&amp;gt;
-  type stdout
-&amp;lt;/match&amp;gt;
-
-####
-## Source descriptions:
-##
-
-## built-in TCP input
-## @see http://docs.fluentd.org/articles/in_forward
-&amp;lt;source&amp;gt;
-  type forward
-&amp;lt;/source&amp;gt;
-
-## built-in UNIX socket input
-#&amp;lt;source&amp;gt;
-#  type unix
-#&amp;lt;/source&amp;gt;
-
-# HTTP input
-# POST http://localhost:8888/&amp;lt;tag&amp;gt;?json=&amp;lt;json&amp;gt;
-# POST http://localhost:8888/td.myapp.login?json={&quot;user&quot;%3A&quot;me&quot;}
-# @see http://docs.fluentd.org/articles/in_http
-&amp;lt;source&amp;gt;
-  type http
-  port 8888
-&amp;lt;/source&amp;gt;
-
-## live debugging agent
-&amp;lt;source&amp;gt;
-  type debug_agent
-  bind 127.0.0.1
-  port 24230
-&amp;lt;/source&amp;gt;
-
-&amp;lt;source&amp;gt;
-  type syslog
-  port 42185
-  tag  syslog
-&amp;lt;/source&amp;gt;
-
-&amp;lt;match syslog.**&amp;gt;
-  type record_reformer
-  tag logs.${tag}.username-token
-  &amp;lt;record&amp;gt;
-    timestamp ${time}
-  &amp;lt;/record&amp;gt;
-&amp;lt;/match&amp;gt;
-
-&amp;lt;source&amp;gt;
-  type netflow
-  tag netflow.event
-  # optional parameters
-  #bind 192.133.156.7
-  bind 0.0.0.0
-  port 5140
-  # optional parser parameters
-  cache_ttl 6000
-  versions [5, 9]
-&amp;lt;/source&amp;gt;
-
-#&amp;lt;match togeoip.netflows&amp;gt;
-&amp;lt;match netflow.event.**&amp;gt;
-  type                   geoip
-  geoip_lookup_key       ipv4_src_addr
-  geoip_database         /usr/share/GeoIP/GeoLiteCity.dat
-  &amp;lt;record&amp;gt;
-    geoip.location      ${latitude[&quot;ipv4_src_addr&quot;]},${longitude[&quot;ipv4_src_addr&quot;]}
-  &amp;lt;/record&amp;gt;
-  tag                    netflows.geoip.attached
-  skip_adding_null_record  true
-&amp;lt;/match&amp;gt;
-
-&amp;lt;match netflows.geoip.attached.** &amp;gt;
-  type record_reformer
-  #tag logs.${tag}.&amp;lt;YOUR USERNAME HERE&amp;gt;-&amp;lt;YOUR TOKEN HERE&amp;gt;
-   tag logs.${tag}.username-token
-  &amp;lt;record&amp;gt;
-    @timestamp ${time}
-  &amp;lt;/record&amp;gt;
-&amp;lt;/match&amp;gt;
-
-&amp;lt;match logs.**&amp;gt;
-#  type copy
-#  &amp;lt;store&amp;gt;
-#        type file
-#        path /var/log/td-agent/netflow-data/netflow.data
-#  &amp;lt;/store&amp;gt;
-#  &amp;lt;store&amp;gt;
-  	type secure_forward
-  	shared_key cisco_zeus_log_metric_pipline
-  	self_hostname fluentd-client1.ciscozeus.io
-  	secure false
-  	keepalive 10
-  	&amp;lt;server&amp;gt;
-	     	host data01.ciscozeus.io
-  	&amp;lt;/server&amp;gt;
-#  &amp;lt;/store&amp;gt;
-#  &amp;lt;store&amp;gt;
-#        type stdout
-#  &amp;lt;/store&amp;gt;
-&amp;lt;/match&amp;gt;
-
-####
-## Examples:
-##
-
-## File input
-## read apache logs continuously and tags td.apache.access
-#&amp;lt;source&amp;gt;
-#  type tail
-#  format apache
-#  path /var/log/httpd-access.log
-#  tag td.apache.access
-#&amp;lt;/source&amp;gt;
-
-## File output
-## match tag=local.** and write to file
-#&amp;lt;match local.**&amp;gt;
-#  type file
-#  path /var/log/td-agent/access
-#&amp;lt;/match&amp;gt;
-
-## Forwarding
-## match tag=system.** and forward to another td-agent server
-#&amp;lt;match system.**&amp;gt;
-#  type forward
-#  host 192.168.0.11
-#  # secondary host is optional
-#  &amp;lt;secondary&amp;gt;
-#    host 192.168.0.12
-#  &amp;lt;/secondary&amp;gt;
-#&amp;lt;/match&amp;gt;
-
-## Multiple output
-## match tag=td.*.* and output to Treasure Data AND file
-#&amp;lt;match td.*.*&amp;gt;
-#  type copy
-#  &amp;lt;store&amp;gt;
-#    type tdlog
-#    apikey API_KEY
-#    auto_create_table
-#    buffer_type file
-#    buffer_path /var/log/td-agent/buffer/td
-#  &amp;lt;/store&amp;gt;
-#  &amp;lt;store&amp;gt;
-#    type file
-#    path /var/log/td-agent/td-%Y-%m-%d/%H.log
-#  &amp;lt;/store&amp;gt;
-#&amp;lt;/match&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;start-td-agent&quot;&gt;Start Td-agent&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  $ sudo /etc/init.d/td-agent start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;start-send-your-netflow-data&quot;&gt;Start Send Your NetFlow Data&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Tail your td-agent log:
-  $ sudo tail -f /var/log/td-agent/td-agent.log
-
-You will see the following info:
-
-[info]: listening fluent socket on 0.0.0.0:24224
-[info]: listening dRuby uri=&quot;druby://127.0.0.1:24230&quot; object=&quot;Engine&quot;
-[info]: listening syslog socket on 0.0.0.0:42185 with udp
-[info]: listening netflow socket on 0.0.0.0:5140 with udp
-[info]: connection established to data.awesome.io.
-
-So the agent listening fluent socket on 0.0.0.0:24224.
-Now you can configure your network devices and send the data.
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;netflow-json-data-sample&quot;&gt;Netflow Json Data Sample&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;flow_seq_num&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;65469633&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;engine_type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;engine_id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sampling_algorithm&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;sampling_interval&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;flow_records&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;ipv4_src_addr&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;192.133.151.21”,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;ipv&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_dst_addr&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;172.22&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;250.141&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;ipv4_next_hop&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;64.71.176.49”,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;input_snmp&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:5,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;output_snmp&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:8,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;in_pkts&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:1,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;in_bytes&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:60,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;first_switched&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2016-03-02&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;36.999&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Z”&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;last_switched&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2016-03-02T15:15:36.999Z”,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_src_port&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:63682,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;_dst_port&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:6001,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;tcp_flags&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:2,&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;protocol&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:6,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;src_tos&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:0,&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;src_as&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:0,&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;dst_as&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:0,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;src_mask&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:0,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;dst_mask&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:0,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;192.133&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;159.1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;”&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;geoip.location&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;33.918800354003906,-84.06780242919922”,
-&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;timestamp&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;:&quot;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2016-03-02&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;51&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-0800&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&quot;dashboard-demo&quot;&gt;Dashboard Demo&lt;/h3&gt;
-</description>
-        <pubDate>Fri, 04 Mar 2016 00:00:00 -0800</pubDate>
-        <link>http://zhaohangbo.me//2016/03/04/collect-netflow-via-fluentd.html</link>
-        <guid isPermaLink="true">http://zhaohangbo.me//2016/03/04/collect-netflow-via-fluentd.html</guid>
-        
-        <category>FluentD</category>
-        
-        <category>Netflow</category>
-        
-        
-        <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>清单--2016年3月4月5月6月</title>
-        <description>&lt;h3 id=&quot;section&quot;&gt;目标&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在美国的最后4个月，在硅谷，了解硅谷人的价值观，思维方式，工作方法。&lt;/li&gt;
-  &lt;li&gt;斯坦福，伯克利&lt;/li&gt;
-  &lt;li&gt;为回国找工作做准备。
-4.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;清单&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;太贪心，不消化。&lt;/li&gt;
-  &lt;li&gt;数量太多，没质量。&lt;/li&gt;
-  &lt;li&gt;有些事必须单独做，有些事不肯能单独做。计划好，单独还是找人合作。&lt;/li&gt;
-  &lt;li&gt;定好时间（剩下4个月）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;产品类书籍
-    &lt;ul&gt;
-      &lt;li&gt;每天&lt;/li&gt;
-      &lt;li&gt;集中在3月-4月&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;个人项目（监控系统部署于阿里云、缘缘课堂-交大红娘、italki-专家咨询版）
-    &lt;ul&gt;
-      &lt;li&gt;4月1号开始&lt;/li&gt;
-      &lt;li&gt;选择一个&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;For Zeus
-    &lt;ul&gt;
-      &lt;li&gt;Benchmark Report like Komei’s&lt;/li&gt;
-      &lt;li&gt;Side project&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;健康(睡眠，篮球，饮食，健身)
-    &lt;ul&gt;
-      &lt;li&gt;每天&lt;/li&gt;
-      &lt;li&gt;10点30上床睡觉&lt;/li&gt;
-      &lt;li&gt;少食，素食&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Fri, 04 Mar 2016 00:00:00 -0800</pubDate>
-        <link>http://zhaohangbo.me//2016/03/04/list-of-specific-goals-in-the-rest-time-of-cisco-internship.html</link>
-        <guid isPermaLink="true">http://zhaohangbo.me//2016/03/04/list-of-specific-goals-in-the-rest-time-of-cisco-internship.html</guid>
-        
-        <category>追求</category>
-        
-        
-        <category>追求</category>
-        
-      </item>
-    
-      <item>
-        <title>Vim</title>
-        <description>&lt;h3 id=&quot;use-customized-vim&quot;&gt;Use Customized Vim:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;dot_vim  &lt;a href=&quot;https://github.com/mutewinter/dot_vim&quot;&gt;[On Github]&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;require &lt;a href=&quot;https://github.com/macvim-dev/macvim/releases&quot;&gt;MacVim&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;copy the mvim script from the MacVim download to your local binary folder &lt;strong&gt;:&lt;/strong&gt; &lt;strong&gt;/usr/local/bin/mvim&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;symlink it &lt;strong&gt;:&lt;/strong&gt; &lt;strong&gt;ln -s /usr/local/bin/mvim vim&lt;/strong&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;plugin-management-tool&quot;&gt;Plugin Management Tool:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Vundle  &lt;a href=&quot;https://github.com/VundleVim/Vundle.vim&quot;&gt;[On Github]&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;plugins-for-vim&quot;&gt;Plugins for Vim:&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;YouCompleteMe  &lt;a href=&quot;https://github.com/Valloric/YouCompleteMe&quot;&gt;[On Github]&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;require &lt;a href=&quot;https://github.com/macvim-dev/macvim/releases&quot;&gt;MacVim&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Need to Compile YouCompleteMe &lt;a href=&quot;https://valloric.github.io/YouCompleteMe/&quot;&gt;[View Doc]&lt;/a&gt;
-        &lt;ol&gt;
-          &lt;li&gt;cd ~/.vim/bundle/YouCompleteMe&lt;/li&gt;
-          &lt;li&gt;./install.py –clang-completer –gocode-completer –tern-completer&lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;jellybeans.vim &lt;a href=&quot;https://github.com/nanotech/jellybeans.vim&quot;&gt;[On Github]&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;vim-ruby &lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;[On Github]&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;nerdtree &lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;[On Github]&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;nerdtree-git-plugin &lt;a href=&quot;https://github.com/Xuyuanp/nerdtree-git-plugin&quot;&gt;[On Github]&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;vim&quot;&gt;从别处粘贴代码到Vim时，不启动自动缩进&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;粘贴之前，Vim输入&lt;code class=&quot;highlighter-rouge&quot;&gt;:set paste&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;粘贴完毕，Vim输入&lt;code class=&quot;highlighter-rouge&quot;&gt;:set nopaste&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;关闭和开启行号&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;关闭 &lt;code class=&quot;highlighter-rouge&quot;&gt;:set nonu&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;开启 &lt;code class=&quot;highlighter-rouge&quot;&gt;:set number&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        <pubDate>Thu, 03 Mar 2016 00:00:00 -0800</pubDate>
-        <link>http://zhaohangbo.me//2016/03/03/vim-power.html</link>
-        <guid isPermaLink="true">http://zhaohangbo.me//2016/03/03/vim-power.html</guid>
-        
-        <category>Vim</category>
-        
-        
-        <category>工具</category>
         
       </item>
     
