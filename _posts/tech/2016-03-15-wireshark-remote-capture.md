@@ -14,7 +14,7 @@ keywords: 技术,网络,Wireshark
 客户正往服务器XXX发送的Netflow,Syslog数据。
 ```
 
-### tshark
+### Use tshark (Terminal-based Wireshark)
 
 ```
 FluentD is listening on port 5140 for 'netflow'
@@ -35,6 +35,7 @@ Result:
 
 ### Wireshark抓取远程服务器上端口的数据包
 
+#### No “add remote interface” on Mac OS Wireshark
 ```
 Wireshark has the "add remote interface" function.
 It can capture packets from a remote interface on another server.
@@ -46,6 +47,7 @@ So use terminal and commands
 To capture packets from a remote interface on another server.
 ```
 
+#### Commands to remote capturing
 ```
 Terminal 1:
 wireshark -k -i /tmp/pipes/netflow.cap
@@ -53,6 +55,8 @@ wireshark -k -i /tmp/pipes/netflow.cap
 Terminal 2:
 ssh ubuntu@10.157.8.243 "tcpdump -s 10000 -U -n  -w - -i any 'port 5140'" > /tmp/pipes/netflow.cap
 ```
+
+#### Tcpdump permissions problem
 ```
 Here I use tcmdump with the para -i any.
 And you might encouter "tcpdump: XXXXX: Permission denied" problem.
@@ -64,6 +68,8 @@ chmod 750 /usr/sbin/tcpdump
 setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ```
 
-[[Reference 1]](https://ask.wireshark.org/questions/12644/wireshark-18-installed-on-mac-os-x-107-dont-find-add-remote-interface)
+[Reference 1: No "add remote interface" and use remote capturing](https://ask.wireshark.org/questions/12644/wireshark-18-installed-on-mac-os-x-107-dont-find-add-remote-interface)
 
-[[Reference 2]](http://blog.nielshorn.net/2010/02/using-wireshark-with-remote-capturing/)
+[Reference 2: Using wireshark with remote capturing](http://blog.nielshorn.net/2010/02/using-wireshark-with-remote-capturing/)
+
+[Reference 3: Tcpdump permissions problem](https://askubuntu.com/questions/530920/tcpdump-permissions-problem)
