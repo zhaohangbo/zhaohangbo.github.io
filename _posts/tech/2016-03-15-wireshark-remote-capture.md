@@ -63,9 +63,9 @@ And you might encouter "tcpdump: XXXXX: Permission denied" problem.
 So we need to make tcpdump have the permission.
 
 1. Set permissions
-chmod 750 /usr/sbin/tcpdump
+sudo chmod 777 /usr/sbin/tcpdump
 2. Give tcpdump the necessary permissions
-setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
+sudo setcap cap_net_raw,cap_net_admin=eip /usr/sbin/tcpdump
 ```
 
 [Reference 1: No "add remote interface" and use remote capturing](https://ask.wireshark.org/questions/12644/wireshark-18-installed-on-mac-os-x-107-dont-find-add-remote-interface)
