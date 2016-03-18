@@ -19,6 +19,9 @@ keywords: 技术,网络,Wireshark
 ```
 FluentD is listening on port 5140 for 'netflow'
 $ tshark -f 'udp port 5140' -i any
+$ tshark -f "udp port 5140" -i any -V -d "udp.port==5140,cflow"
+
+The output would be in binary without decode by '-d' option
 
 Result:
 "IP 1->IP 2 UDP 312 Source port: 36663  Destination port: 5140"
