@@ -6,7 +6,18 @@ tags: 算法
 keywords: 算法,Algorithm
 ---
 
-[Algorithms BookSite](http://algs4.cs.princeton.edu/15uf/)
+```
+Union --> means connect two nodes(components)
+Find  --> Find Root: find the root of a node.
+```
+
+### Practise
+
+[Leetcode-261-Graph-Valid-Tree](https://leetcode.com/problems/graph-valid-tree/)
+
+### Reference
+
+[BookSite-Princeton-Algorithms from Coursera](http://algs4.cs.princeton.edu/15uf/)
 
 ### Sample Problem
 
@@ -81,6 +92,3 @@ public class UF(){
 
 ![Union-Find-summary](/assets/img/posts/algorithm/2016-04-08/summary.png)
 
-### Reference
-
-[BookSite-Princeton-Algorithms from Coursera](http://algs4.cs.princeton.edu/15uf/)
