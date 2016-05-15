@@ -27,6 +27,6 @@ title: 关于我
 
 # 个人简历
 
-- 请您查看我的简历: [**个人简历**](/assets/CV_Hangbo_English.pdf)
-- Please View My English Resume here: [**Resume**](/assets/CV_Hangbo_English.pdf)
+- 中文简历: [**个人简历**](/assets/产品_赵杭波_浙江大学_中文简历_横版.pdf)
+- 英文简历: [**Resume**](/assets/CV_Hangbo_English.pdf)
 - 我的领英: [**Linkedin**](https://cn.linkedin.com/in/hangbo-zhao-089814a8)

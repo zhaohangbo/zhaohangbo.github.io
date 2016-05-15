@@ -4,7 +4,7 @@ title: Mac 常用资源
 category: 工具
 tags: Mac
 keywords: Mac
-description: 
+description:
 ---
 
 ## 常用软件
@@ -36,7 +36,7 @@ description:
 ### 剪贴板操作
 写入剪切板
 
-    echo 'test' > pbcopy 
+    echo 'test' > pbcopy
     cat testfile > pbcopy
 
 读取剪贴板
@@ -89,3 +89,16 @@ killall Dock
 ### Chrome
 
 - 切换用户 `Command + shift + M`
+
+### Homebrew
+
+[if homebrew can not work. then](https://stackoverflow.com/questions/24652996/homebrew-not-working-on-osx)
+
+```
+First, open terminal and cd /usr/local/, and git status to see if Homebrew is clean.
+if dirty, git reset --hard && git clean -df
+then brew doctor, brew update
+If still broken, try this in your terminal:
+$ sudo rm /System/Library/Frameworks/Ruby.framework/Versions/Current
+$ sudo ln -s /System/Library/Frameworks/Ruby.framework/Versions/1.8 /System/Library/Frameworks/Ruby.framework/Versions/Current
+```
