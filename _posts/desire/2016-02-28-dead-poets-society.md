@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Dead Poets Society
-category: 生活
+category: 追求
 keywords: US, Visa
 ---
 

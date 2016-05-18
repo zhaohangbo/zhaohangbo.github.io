@@ -1,6 +1,6 @@
 ---
 layout: post
-title: List of Life
+title: A list
 category: 追求
 tags: [Goal, Plan, Essay]
 description:
@@ -8,7 +8,7 @@ description:
 
 ```
 很多问题，永远想不明白。
-但不要停止去追寻答案。
+但不要停止追寻答案的脚步。
 做个勇士，知其不可而为之。
 
 Two roads diverged in a wood,
@@ -16,7 +16,7 @@ and I, I took the one less traveled by,
 and that has made all the difference.
 ```
 
-**人生清单----我想要实现的事情**
+**人生清单----我要做的事情**
 
 1. 带父母去三亚度假，2016-2017春节
   * 我的爹滴和妈咪是没有周末的，每年过年能休息5天，他们打拼了十几年，始终如一，是勤劳的创业者。
