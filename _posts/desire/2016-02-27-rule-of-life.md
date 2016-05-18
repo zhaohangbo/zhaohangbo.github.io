@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rule of Life
+title: Rules
 category: 追求
 tags: [Essay, Rule, Life]
 keywords: Rule, Life
@@ -8,13 +8,12 @@ description:
 ---
 
 ```
-任何事情总不是完全按着计划走的。
-万物互联，万变之中，怎么可能。
-
+任何事情，
+都不是完全按着计划走的。
 树立自己的原则，却能以不变应对万变。
 ```
 
-所以下面收录了一些先闲的人生信条和原则，可以给我们参考和借鉴。
+收录一些先闲的信条和原则，可以给自己参考和借鉴。
 
 ## 先闲的人生原则
 
