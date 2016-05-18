@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A list
+title: A List
 category: 追求
 tags: [Goal, Plan, Essay]
 description:
@@ -8,7 +8,7 @@ description:
 
 ```
 很多问题，永远想不明白。
-但不要停止追寻答案的脚步。
+但不要停止去追寻答案。
 做个勇士，知其不可而为之。
 
 Two roads diverged in a wood,
