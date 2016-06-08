@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 待读书单
+title: 非技术书单
 category: 读书
-keywords: 阅读,书单,2991
+keywords: 阅读,书单
 ---
 
 ## 浪潮之巅
@@ -15,10 +15,10 @@ keywords: 阅读,书单,2991
 
 ## Outlier
 
-- status: 待读
+- status: Awaiting Reading
 - author: Malcolm Gladwell
-- language: 英文
-- tag: 成功学，方法论
+- language: English
+- tag: Methodology，Success
 
 ## Living Beautifully with Uncertainty and Change
 
@@ -27,9 +27,9 @@ keywords: 阅读,书单,2991
 - language: 英文
 - tag: 哲学宗教，藏族佛学
 
-## Cracking the Coding Interview
+## The Power of Habit
 
-- status: 未读
-- author: Gayle Laakmann McDowell
-- language: 英文
-- tag: 算法，工作，面试
+- status: Awaiting Reading
+- author: charles Duhigg
+- language: English
+- tag: Methodology, Success
