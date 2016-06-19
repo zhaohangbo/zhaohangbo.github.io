@@ -1,9 +1,9 @@
 ---
 layout: post
 title: 淘宝上的万方和知网
-category: 算法
-tags: 算法
-keywords: 算法,排序,Sort,Algorithm
+category: 创业
+tags: 创业
+keywords: 创业
 ---
 
 ## 淘宝的万方和知网的账号销售案例，很值得借鉴？
