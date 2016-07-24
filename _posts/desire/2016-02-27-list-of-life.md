@@ -7,9 +7,7 @@ description:
 ---
 
 ```
-很多问题，永远想不明白。
-但不要停止去追寻答案。
-做个勇士，知其不可而为之。
+知其不可而为之。
 
 Two roads diverged in a wood,
 and I, I took the one less traveled by,
